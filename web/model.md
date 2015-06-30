@@ -49,8 +49,9 @@ Content-type: text/plain; charset=iso-8859-1\n\n
 脚本解释器设置错误。脚本第一行应该以'#!解释器路径'的形式, 填写脚本解释器的路径，如果是PERL程序，常见的路径为:     #!/usr/bin/perl 或 #!/usr/local/bin/perl           如果是PHP程序，不需要填写解释器路径，系统会自动找到PHP。
 
 2.  Fastcgi模式
-           fast-cgi 是cgi的升级版本，FastCGI 像是一个常驻 (long-live) 型的 CGI，它可以一直执行着，只要激活后，不会每次都要花费时间去 fork 一次 (这是 CGI 最为人诟病的 fork-and-execute 模式)。
-          FastCGI的工作原理是：
+
+ fast-cgi 是cgi的升级版本，FastCGI 像是一个常驻 (long-live) 型的 CGI，它可以一直执行着，只要激活后，不会每次都要花费时间去 fork 一次 (这是 CGI 最为人诟病的 fork-and-execute 模式)。
+ FastCGI的工作原理是：
 (1)、Web Server启动时载入FastCGI进程管理器【PHP的FastCGI进程管理器是PHP-FPM(php-FastCGI Process Manager)】（IIS ISAPI或Apache Module);
 
 (2)、FastCGI进程管理器自身初始化，启动多个CGI解释器进程 (在任务管理器中可见多个php-cgi.exe)并等待来自Web Server的连接。
