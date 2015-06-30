@@ -150,7 +150,9 @@ Allow from all
 </Directory>
 就可以了。
 ps -ef|grep  php-cgi可以看见10个fastcgi进程在跑。
+
 3.   CLI模式
+
 cli是php的命令行运行模式，大家经常会使用它，但是可能并没有注意到（例如：我们在linux下经常使用 "php -m"查找PHP安装了那些扩展就是PHP命令行运行模式；有兴趣的同学可以输入php -h去深入研究该运行模式）
 
 1.让 PHP 运行指定文件。
@@ -166,7 +168,8 @@ php -r "print_r(get_defined_constants());"
 $ some_application | some_filter | php | sort -u >final_output.txt
 
 4. 模块模式
-           模块模式是以mod_php5模块的形式集成，此时mod_php5模块的作用是接收Apache传递过来的PHP文件请求，并处理这些请求，然后将处理后的结果返回给Apache。如果我们在Apache启动前在其配置文件中配置好了PHP模块（mod_php5）， PHP模块通过注册apache2的ap_hook_post_config挂钩，在Apache启动的时候启动此模块以接受PHP文件的请求。
+
+模块模式是以mod_php5模块的形式集成，此时mod_php5模块的作用是接收Apache传递过来的PHP文件请求，并处理这些请求，然后将处理后的结果返回给Apache。如果我们在Apache启动前在其配置文件中配置好了PHP模块（mod_php5）， PHP模块通过注册apache2的ap_hook_post_config挂钩，在Apache启动的时候启动此模块以接受PHP文件的请求。
          除了这种启动时的加载方式，Apache的模块可以在运行的时候动态装载，这意味着对服务器可以进行功能扩展而不需要重新对源代码进行编译，甚至根本不需要停止服务器。我们所需要做的仅仅是给服务器发送信号HUP或者AP_SIG_GRACEFUL通知服务器重新载入模块。但是在动态加载之前，我们需要将模块编译成为动态链接库。此时的动态加载就是加载动态链接库。 Apache中对动态链接库的处理是通过模块mod_so来完成的，因此mod_so模块不能被动态加载，它只能被静态编译进Apache的核心。这意味着它是随着Apache一起启动的。
 
         Apache是如何加载模块的呢？我们以前面提到的mod_php5模块为例。首先我们需要在Apache的配置文件httpd.conf中添加一行：
