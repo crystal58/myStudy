@@ -46,7 +46,7 @@ cd learnlaravel5
 sudo chmod -R 777 storage
 
 重新访问 http://fuck.io:88/home ，随意输入邮箱和密码，如果你得到以下画面
-<img src="../img/0e8e1425720308.jpg>
+<img src="../img/0e8e1425720308.jpg" />
 
 那么恭喜你~ Laravel 5 安装成功！
 
