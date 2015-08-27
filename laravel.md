@@ -5,4 +5,5 @@
 <li><a href='./laravel/model.md' target="_blank">模型</a></li>
 <li><a href='./laravel/view.md' target="_blank">视图</a></li>
 <li><a href='./laravel/controller.md' target="_blank">控制器</a></li>
+<li><a href='./laravel/select.md' target="_blank">数据库操作</a></li>
 </ul>

@@ -11,7 +11,6 @@ Artisan 帮我们在 `app/` 下创建了两个文件 `Article.php` 和 `Page.php
 
 Model 即为 MVC 中的 M，翻译为 模型，负责跟数据库交互。在 Eloquent 中，数据库中每一张表对应着一个 Model 类（当然也可以对应多个）。
 
-如果你想深入地了解 Eloquent，可以阅读系列文章：<a href="http://lvwenhan.com/laravel/421.html">深入理解 Laravel Eloquent（一）——基本概念及用法</a>
 接下来进行 Article 和 Page 类对应的 articles 表和 pages表的数据库迁移，进入 `learnlaravel5/database/migrations` 文件夹。
 
 在 ***_create_articles_table.php 中修改：
@@ -41,6 +40,9 @@ Schema::create('pages', function(Blueprint $table)
 
 php artisan migrate
 成功以后， tables 表和 pages 表已经出现在了数据库里，去看看吧~
+
+注意在默认情况下，在数据库表里需要有 updated_at 和 created_at 两个字段。如果您不想设定或自动更新这两个字段，则将类里的 $timestamps 属性设为 false即可。
+
 
 ##数据库填充 Seeder
 在 `database/seeds/` 下新建 `PageTableSeeder.php` 文件，内容如下：
@@ -79,3 +81,31 @@ composer dump-autoload
 
 php artisan db:seed
 去看看 pages 表，是不是多了十行数据？
+
+## 数据库操作
+以users表为例
+
+取出所有记录
+
+$users = User::all();
+
+根据主键取出一条数据
+
+$user = User::find(1);
+
+Eloquent 模型结合查询语法
+
+$users = User::where('votes', '>', 100)->take(10)->get();
+
+foreach ($users as $user)
+{
+    var_dump($user->name);
+}
+Eloquent 聚合查询
+
+当然，您也可以使用查询构造器的聚合查询方法。
+
+$count = User::where('votes', '>', 100)->count();
+如果没办法使用流畅接口产生出查询语句，也可以使用 whereRaw 方法：
+
+$users = User::whereRaw('age > ? and votes = 100', [25])->get();
