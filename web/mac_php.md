@@ -6,7 +6,7 @@
 
 gd已经支持，需要安装freetype: brew install freetype
 
-如果mac 没有安装brew ：ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+如果mac 没有安装brew,安装brew ：ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 安装好freetype,
 
