@@ -13,4 +13,4 @@
 ##php artisan make:controller Admin/AdminHomeController
   创建controller
 
-
+##composer dump-autoload，重新加载一下composer的auto-load
