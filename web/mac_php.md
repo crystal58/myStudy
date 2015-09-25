@@ -1,4 +1,4 @@
-#mac ox 10.10.2 自带PHP 不支持 imagettfbbox
+#mac ox 10.10.2 自带PHP 不支持 imagettfbbox()
 
 ##报错：Call to undefined function imagettfbbox()
 
