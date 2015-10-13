@@ -6,7 +6,7 @@ Laravel的验证码库gregwar/captcha
 
 "require": {
         ...
-        "gregwar/captcha": "1.*"
+        "gregwar/captcha": "dev-master"
     },
 然后，已成习惯的命令：
 
@@ -94,108 +94,16 @@ else {
 原创地址：http://www.jianshu.com/p/8e4ac7852b5a
 
 
-在composer.json中增加依赖：
+补充：
 
+为了安全，可以为session加密
 
-"gregwar/captcha": "dev-master"
-1
-"gregwar/captcha": "dev-master"
-在命令行中切换到项目根目录，运行：
-
-
-composer install
-1
-composer install
 编辑app/config/app.php，增加配置项：
 
+'key' => '你的key，作为加密用',
 
-'cookie_key' => '你的key，作为加密用',
-1
-'cookie_key' => '你的key，作为加密用',
-在app/controllers目录中建立ExtController.php
+加密：
+Crypt::encrypt($phrase);
 
-
-use Gregwar\Captcha\CaptchaBuilder;
-use Illuminate\Encryption;
-use Illuminate\Cookie;
-
-class ExtController extends BaseController {
-
-	/**
-	 * 输出验证码
-	 */
-	public function captcha()
-	{
-		$builder = new CaptchaBuilder;
-		$builder->build();
-		$phrase = $builder->getPhrase();
-		Crypt::setKey(Config::get('app.cookie_key'));
-		$phrase_new = Crypt::encrypt($phrase);
-		Session::flash('__captcha', $phrase_new);
-		header("Cache-Control: no-cache, must-revalidate");
-		header('Content-Type: image/jpeg');
-		$builder->output();
-		exit;
-	}
-}
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-use Gregwar\Captcha\CaptchaBuilder;
-use Illuminate\Encryption;
-use Illuminate\Cookie;
-
-class ExtController extends BaseController {
-
-	/**
-	* 输出验证码
-	*/
-	public function captcha()
-	{
-	$builder = new CaptchaBuilder;
-	$builder->build();
-	$phrase = $builder->getPhrase();
-	Crypt::setKey(Config::get('app.cookie_key'));
-	$phrase_new = Crypt::encrypt($phrase);
-	Session::flash('__captcha', $phrase_new);
-	header("Cache-Control: no-cache, must-revalidate");
-	header('Content-Type: image/jpeg');
-	$builder->output();
-	exit;
-	}
-}
-增加路由：
-
-
-Route::get('ext/captcha', 'ExtController@captcha');
-1
-Route::get('ext/captcha', 'ExtController@captcha');
-用到的库：
-
-https://packagist.org/packages/gregwar/captcha
-
-思路：
-
-把生成的验证码加密后放到Session里，供验证用。同时使用独立的加密key增强安全性。
-
-转载：http://www.codecto.com/article/9.html
+解密：
+Crypt::decrypt($phrase)
