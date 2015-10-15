@@ -48,7 +48,7 @@ class KitController extends Controller {
      */
     public function captcha($tmp)
     {
-                //生成验证码图片的Builder对象，配置相应属性
+        //生成验证码图片的Builder对象，配置相应属性
         $builder = new CaptchaBuilder;
         //可以设置图片宽高及字体
         $builder->build($width = 100, $height = 40, $font = null);
