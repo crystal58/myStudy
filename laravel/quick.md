@@ -14,3 +14,5 @@
   创建controller
 
 ##composer dump-autoload，重新加载一下composer的auto-load
+清除缓存：php artisan cache:clear
+         composer clearcache
